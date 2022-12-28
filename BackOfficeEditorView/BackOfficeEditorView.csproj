@@ -15,7 +15,7 @@
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 
 		<PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/Rockerby</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/Rockerby/BackOfficeEditorView</PackageProjectUrl>
 
 		<PackageTags>umbraco umbraco-marketplace</PackageTags>
 

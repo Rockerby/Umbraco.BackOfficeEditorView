@@ -21,7 +21,7 @@
 
                                 <div title="SessionID {{ user.sessionId }} | UserID {{ user.userId }}">
                                     {{ user.userName }}<br />
-                                    <small>{{ user.dateLogged }}</small>
+                                    <small>{{ user.dateLogged | date:'medium' }}</small>
                                 </div>
                             </div>
                         </umb-control-group>
