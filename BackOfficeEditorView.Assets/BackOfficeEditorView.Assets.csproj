@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ContentTargetFolders>.</ContentTargetFolders>
+    <Product>BackOfficeEditorView.Assets</Product>
+    <PackageId>BackOfficeEditorView.Assets</PackageId>
+    <Title>BackOfficeEditorView.Assets</Title>
+    <Description>...</Description>
+    <PackageTags>umbraco plugin package</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Umbraco.Cms.Web.Website" Version="10.3.2" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="10.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="buildTransitive\**" Pack="true" PackagePath="buildTransitive" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App_Plugins\BackOfficeEditorView\components\editingButton.html" />
+    <None Remove="App_Plugins\BackOfficeEditorView\img\spy-icon.svg" />
+    <None Remove="App_Plugins\BackOfficeEditorView\package.manifest" />
+    <None Remove="App_Plugins\BackOfficeEditorView\scripts\BackOfficeEditorView.controller.js" />
+    <None Remove="App_Plugins\BackOfficeEditorView\scripts\BackOfficeEditorView.services.js" />
+    <None Remove="App_Plugins\BackOfficeEditorView\scripts\BackOfficeEditorView.startup.js" />
+    <None Remove="App_Plugins\BackOfficeEditorView\scripts\js.cookie.min.js" />
+    <None Remove="App_Plugins\BackOfficeEditorView\styles\boev_main.css" />
+    <None Remove="App_Plugins\BackOfficeEditorView\views\editingDrawer.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App_Plugins\BackOfficeEditorView\components\editingButton.html" />
+    <Content Include="App_Plugins\BackOfficeEditorView\img\spy-icon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\BackOfficeEditorView\package.manifest">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\BackOfficeEditorView\scripts\BackOfficeEditorView.controller.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="App_Plugins\BackOfficeEditorView\scripts\BackOfficeEditorView.services.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="App_Plugins\BackOfficeEditorView\scripts\BackOfficeEditorView.startup.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
+    <Content Include="App_Plugins\BackOfficeEditorView\scripts\js.cookie.min.js" />
+	  <Content Include="App_Plugins\BackOfficeEditorView\views\editingDrawer.html" />
+	  <Content Include="App_Plugins\BackOfficeEditorView\styles\boev_main.css" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,21 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BackOfficeEditorViewContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\BackOfficeEditorView\**\*.*</BackOfficeEditorViewContentFilesPath>
+  </PropertyGroup>
+
+  <Target Name="CopyBackOfficeEditorViewAssets" BeforeTargets="Build">
+    <ItemGroup>
+      <BackOfficeEditorViewContentFiles Include="$(BackOfficeEditorViewContentFilesPath)" />
+    </ItemGroup>
+    <Message Text="Copying BackOfficeEditorView files: $(BackOfficeEditorViewContentFilesPath) - #@(BackOfficeEditorViewContentFiles->Count()) files" Importance="high" />
+    <Copy SourceFiles="@(BackOfficeEditorViewContentFiles)" DestinationFiles="@(BackOfficeEditorViewContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\BackOfficeEditorView\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="ClearBackOfficeEditorViewAssets" BeforeTargets="Clean">
+    <ItemGroup>
+      <BackOfficeEditorViewDir Include="$(MSBuildProjectDirectory)\App_Plugins\BackOfficeEditorView\" />
+    </ItemGroup>
+    <Message Text="Clear old BackOfficeEditorView data" Importance="high" />
+    <RemoveDir Directories="@(BackOfficeEditorViewDir)" />
+  </Target>
+</Project>

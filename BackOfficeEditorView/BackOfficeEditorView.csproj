@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ContentTargetFolders>.</ContentTargetFolders>
+
+		<Product>BackOfficeEditorView</Product>
+		<PackageId>BackOfficeEditorView</PackageId>
+		<Title>BackOfficeEditorView</Title>
+
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<Authors>Richard Ockerby</Authors>
+		<Company>Arjo</Company>
+
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+
+		<PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Rockerby</PackageProjectUrl>
+
+		<PackageTags>umbraco umbraco-marketplace</PackageTags>
+
+		<RepositoryUrl>https://github.com/Rockerby</RepositoryUrl>
+
+		<Copyright>Richard Ockerby @ 2022-2023</Copyright>
+		<Description>Check out who is also looking at content</Description>
+
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>false</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BackOfficeEditorView.Assets\BackOfficeEditorView.Assets.csproj" />
+		<ProjectReference Include="..\BackOfficeEditorView.Core\BackOfficeEditorView.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="readme.md" Pack="true" PackagePath="\" />
+		<None Include="readme.txt" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+</Project>
