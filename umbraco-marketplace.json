@@ -1,6 +1,7 @@
 {
   "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
   "Category": "Editor Tools",
+  "LicenseTypes": [ "Free" ],
   "Screenshots": [
     {
       "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-No-Others.png",
