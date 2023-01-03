@@ -1,0 +1,22 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "Category": "Editor Tools",
+  "Screenshots": [
+    {
+      "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-No-Others.png",
+      "Caption": "Content view - no other users"
+    },
+    {
+      "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-No-Others_SidePanel.png",
+      "Caption": "Side panel - no other users"
+    },
+    {
+      "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-Others.png",
+      "Caption": "Content view - other user(s)"
+    },
+    {
+      "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-Others_SidePanel.png",
+      "Caption": "Side panel - one other user"
+    }
+  ]
+}

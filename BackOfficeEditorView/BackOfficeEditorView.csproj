@@ -32,6 +32,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="umbraco-marketplace.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\BackOfficeEditorView.Assets\BackOfficeEditorView.Assets.csproj" />
 		<ProjectReference Include="..\BackOfficeEditorView.Core\BackOfficeEditorView.Core.csproj" />
 	</ItemGroup>
