@@ -22,7 +22,7 @@
 		<RepositoryUrl>https://github.com/Rockerby</RepositoryUrl>
 
 		<Copyright>Richard Ockerby @ 2022-2023</Copyright>
-		<Description>Check out who is also looking at content</Description>
+		<Description>See who else is editing the same content as you! An Umbraco package to help prevent content overwriting by multiple users.</Description>
 
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<IncludeSymbols>false</IncludeSymbols>
