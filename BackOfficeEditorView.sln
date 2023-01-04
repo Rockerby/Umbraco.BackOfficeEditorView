@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackOfficeEditorView", "BackOfficeEditorView\BackOfficeEditorView.csproj", "{6EEE3FDE-EC40-4750-8566-5C5724DF0D09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco.BackOfficeEditorView", "BackOfficeEditorView\Umbraco.BackOfficeEditorView.csproj", "{6EEE3FDE-EC40-4750-8566-5C5724DF0D09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

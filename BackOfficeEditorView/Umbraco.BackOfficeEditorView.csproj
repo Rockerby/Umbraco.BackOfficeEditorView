@@ -4,9 +4,10 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ContentTargetFolders>.</ContentTargetFolders>
 
-		<Product>BackOfficeEditorView</Product>
-		<PackageId>BackOfficeEditorView</PackageId>
-		<Title>BackOfficeEditorView</Title>
+		<Product>Umbraco.BackOfficeEditorView</Product>
+		<PackageId>Umbraco.BackOfficeEditorView</PackageId>
+		<Title>BackOffice Editor View for Umbraco</Title>
+		<PackageIcon>icon.png</PackageIcon>
 
 		<VersionPrefix>1.0.0</VersionPrefix>
 		<Authors>Richard Ockerby</Authors>
@@ -29,10 +30,18 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
 		<IncludeBuildOutput>true</IncludeBuildOutput>
+		
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="icon.png" />
 	  <None Remove="umbraco-marketplace.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="icon.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -42,7 +51,6 @@
 
 	<ItemGroup>
 		<None Include="readme.md" Pack="true" PackagePath="\" />
-		<None Include="readme.txt" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>
