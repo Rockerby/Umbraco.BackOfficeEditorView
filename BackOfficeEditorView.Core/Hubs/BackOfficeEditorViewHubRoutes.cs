@@ -44,6 +44,6 @@ namespace BackOfficeEditorView.Core.Hubs
         /// Get the path to the SignalR hub
         /// </summary>
         public string GetBackOfficeEditorViewHubRoute()
-            => $"/{_umbracoPathSegment}/{nameof(SyncHub)}";
+            => $"/{_umbracoPathSegment}/boev-{nameof(SyncHub)}";
     }
 }
