@@ -144,11 +144,9 @@
 
         function processPage() {
             if (location.hash.indexOf('/content') == 1 && location.hash.indexOf('edit') !== -1) {
-                console.log("WHAT UP!");
                 let attempts = 0;
                 const timeout = 100;
                 function loadMarkup() {
-                    console.log('namefield?', $('#nameField'));
                     // On accassion, this script can load faster than the markup, so try
                     // to load in the content or retry if the name bar doesn't exist
                     if ($('#nameField').length == 0) {
@@ -176,7 +174,6 @@
 
                     // Get the user and notify the server that they are looking at a specific bit of content
                     authResource.getCurrentUser().then(function (user) {
-                        console.log("user", user);
                         const viewData = {
                             sessionId: window.boevSessionId,
                             userId: user.id,

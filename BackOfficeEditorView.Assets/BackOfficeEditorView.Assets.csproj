@@ -3,7 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ContentTargetFolders>.</ContentTargetFolders>
     <Product>BackOfficeEditorView.Assets</Product>
-    <PackageId>Umbraco.BackOfficeEditorView.Assets</PackageId>
+    <PackageId>Arjo.UmbracoBackOfficeEditorView.Assets</PackageId>
     <Title>BackOfficeEditorView.Assets</Title>
     <Description>...</Description>
     <PackageTags>umbraco plugin package</PackageTags>
@@ -28,7 +28,7 @@
     <None Remove="App_Plugins\BackOfficeEditorView\scripts\js.cookie.min.js" />
     <None Remove="App_Plugins\BackOfficeEditorView\styles\boev_main.css" />
     <None Remove="App_Plugins\BackOfficeEditorView\views\editingDrawer.html" />
-    <None Remove="buildTransitive\Umbraco.BackOfficeEditorView.Assets.targets" />
+    <None Remove="buildTransitive\Arjo.UmbracoBackOfficeEditorView.Assets.targets" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,7 +56,7 @@
     <Content Include="App_Plugins\BackOfficeEditorView\scripts\js.cookie.min.js" />
 	  <Content Include="App_Plugins\BackOfficeEditorView\views\editingDrawer.html" />
 	  <Content Include="App_Plugins\BackOfficeEditorView\styles\boev_main.css" />
-	  <Content Include="buildTransitive\Umbraco.BackOfficeEditorView.Assets.targets">
+	  <Content Include="buildTransitive\Arjo.UmbracoBackOfficeEditorView.Assets.targets">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
   </ItemGroup>

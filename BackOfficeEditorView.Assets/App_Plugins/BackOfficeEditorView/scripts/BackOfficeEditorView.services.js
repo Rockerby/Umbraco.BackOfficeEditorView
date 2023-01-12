@@ -1,6 +1,5 @@
 ﻿function backOfficeEditorViewServices($rootScope, $q, assetsService, eventsService) {
 
-    console.log("Umbraco settings:", Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath);
     if (typeof (Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath) == 'undefined') {
         console.log("boev :: path isn't set yet");
         //return {};

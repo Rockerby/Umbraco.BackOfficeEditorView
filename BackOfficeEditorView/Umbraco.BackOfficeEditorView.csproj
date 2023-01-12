@@ -4,8 +4,8 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ContentTargetFolders>.</ContentTargetFolders>
 
-		<Product>Umbraco.BackOfficeEditorView</Product>
-		<PackageId>Umbraco.BackOfficeEditorView</PackageId>
+		<Product>Arjo.UmbracoBackOfficeEditorView</Product>
+		<PackageId>Arjo.UmbracoBackOfficeEditorView</PackageId>
 		<Title>BackOffice Editor View for Umbraco</Title>
 		<PackageIcon>icon.png</PackageIcon>
 
