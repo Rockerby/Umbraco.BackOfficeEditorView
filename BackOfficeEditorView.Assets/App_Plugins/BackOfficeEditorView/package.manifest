@@ -2,6 +2,7 @@
   "name": "BackOfficeEditorView",
   "version": "1.0.0",
   "allowPackageTelemetry": true,
+  "bundleOptions": "None",
   "css": [
     "~/App_Plugins/BackOfficeEditorView/styles/boev_main.css"
   ],

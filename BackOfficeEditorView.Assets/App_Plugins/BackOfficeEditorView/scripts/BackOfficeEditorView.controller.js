@@ -80,7 +80,7 @@
     }
 
     angular.module('umbraco')
-        .component('editingButton', editingButtonComponent);
+        .component('backOfficeEditorViewEditingButton', editingButtonComponent);
 
     angular.module('umbraco')
         .controller('backOfficeEditorViewDrawerController', backOfficeEditorViewDrawerController);
@@ -157,19 +157,20 @@
                         }
                         return;
                     }
+
                     // Just check we're not already init'd here
                     if ($('#boev_main-wrapper_outter').length > 0)
                         return;
                     $('#nameField').before('<div id="boev_main-wrapper_outter"></div>');
-                    
+
                     // Have Angular load in the HTML and the NG controller!
                     injector.invoke(function ($compile) {
                         var obj = $('#boev_main-wrapper_outter');
-                        var scope = obj.scope();
-                        if (scope != undefined) {
-                            obj[0].appendChild(document.createElement('editing-button'));
-                            $compile(obj.contents())(scope);
-                        }
+                        //var scope = obj.scope();
+                        //if (scope != undefined) {
+                        obj[0].appendChild(document.createElement('back-office-editor-view-editing-button'));
+                        $compile(obj.contents())($scope);
+                        //}
                     });
 
                     // Get the user and notify the server that they are looking at a specific bit of content
@@ -185,7 +186,6 @@
                 }
                 loadMarkup();
             } else {
-
                 // This is taken care of with the destoy function within the backOfficeEditorViewMenuController
 
                 // If we're not on a page that has any content nodes then remove the user
