@@ -3,7 +3,6 @@
        
         // Load in a new html element which will load in the angular controller for the work
         function addWrapperAndLogic() {
-
             // This element is visible on all pages when you are logged in
             if ($(".umb-app-header").length && $(".umb-app-header").is(':visible')) {
 
@@ -18,13 +17,13 @@
                     var html = $('<div id="boev_main-controller" ng-controller="backOfficeEditorViewContentController as vm"></div>');
 
                     // Have Angular load in the HTML and the NG controller!
-                    injector.invoke(function ($compile) {
+                    injector.invoke(function ($compile, $rootScope) {
                         var obj = $('#boev_main');
                         var scope = obj.scope();
-                        if (scope != undefined) {
+                        //if (scope != undefined) {
                             obj.html(html);
-                            $compile(obj.contents())(scope);
-                        }
+                            $compile(obj.contents())($rootScope);
+                        //}
                     });
                 }
             } else {
@@ -33,15 +32,15 @@
         };
 
         function loadIn() {
-            const scope = angular.element('#umbracoMainPageBody').scope();
-            if (typeof (scope) == 'undefined') {
-                setTimeout(() => { loadIn(); }, 100);
-                return;
-            }
+            //const scope = angular.element('#umbracoMainPageBody').scope();
+            //if (typeof (scope) == 'undefined') {
+            //    setTimeout(() => { loadIn(); }, 100);
+            //    return;
+            //}
 
-            scope.$on('$viewContentLoaded', function () {
+            //scope.$on('$viewContentLoaded', function () {
                 addWrapperAndLogic();
-            });
+            //});
         }
         loadIn();
     }
