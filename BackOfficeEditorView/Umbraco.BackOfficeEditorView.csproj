@@ -9,7 +9,7 @@
 		<Title>BackOffice Editor View for Umbraco</Title>
 		<PackageIcon>icon.png</PackageIcon>
 
-		<VersionPrefix>1.0.1</VersionPrefix>
+		<VersionPrefix>1.0.2</VersionPrefix>
 		<Authors>Richard Ockerby</Authors>
 		<Company>Arjo</Company>
 
