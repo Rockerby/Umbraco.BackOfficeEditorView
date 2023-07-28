@@ -1,10 +1,10 @@
-#boev_main-wrapper {
-  display: flex;
-  width: 32px;
-  height: 32px;
-  margin-top: 0;
+#boev_main-wrapper, #boev_lock-icon-wrapper {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    margin-top: 0;
 }
-#boev_main-wrapper.active svg path {
+#boev_main-wrapper.active svg path, #boev_lock-icon-wrapper.active svg path {
   fill: red;
 }
 
@@ -12,4 +12,8 @@
 
 .boev_userlist {
     gap: 20px;
+}
+
+.boev_editing-buttons {
+    display: flex;
 }

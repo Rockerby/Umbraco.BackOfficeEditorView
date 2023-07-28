@@ -31,17 +31,6 @@
             }
         };
 
-        function loadIn() {
-            //const scope = angular.element('#umbracoMainPageBody').scope();
-            //if (typeof (scope) == 'undefined') {
-            //    setTimeout(() => { loadIn(); }, 100);
-            //    return;
-            //}
-
-            //scope.$on('$viewContentLoaded', function () {
-                addWrapperAndLogic();
-            //});
-        }
-        loadIn();
+        addWrapperAndLogic();
     }
 );  
