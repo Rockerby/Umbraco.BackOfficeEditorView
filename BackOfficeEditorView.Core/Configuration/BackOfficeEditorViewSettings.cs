@@ -12,5 +12,6 @@ namespace BackOfficeEditorView.Core.Configuration
     public class BackOfficeEditorViewSettings
     {
         public string Name { get; set; }
+        public bool CanLockContent { get; set; }
     }
 }
