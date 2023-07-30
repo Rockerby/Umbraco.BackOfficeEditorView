@@ -209,10 +209,12 @@
                         };
                         backOfficeEditorViewServices.registerView(viewData);
                     });
-                    // delay the call for content locks on page load, because it can beat the component render
-                    setTimeout(() => {
-                        backOfficeEditorViewServices.getContentLocks($routeParams.id);
-                    }, 500);
+                    if (Umbraco.Sys.ServerVariables.boev.enabledLockFunction || false) {
+                        // delay the call for content locks on page load, because it can beat the component render
+                        setTimeout(() => {
+                            backOfficeEditorViewServices.getContentLocks($routeParams.id);
+                        }, 500);
+                    }
                 }
                 loadMarkup();
             } else {
