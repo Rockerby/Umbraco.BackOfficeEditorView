@@ -22,10 +22,6 @@
         vm.lockedByOtherUser = '';
         vm.lockedByUserEmail = '';
 
-        if (vm.showLockedFn) {
-            backOfficeEditorViewServices.getContentLocks($routeParams.id);
-        }
-
         vm.close = function () {
             editorService.close();
         }
@@ -213,6 +209,10 @@
                         };
                         backOfficeEditorViewServices.registerView(viewData);
                     });
+                    // delay the call for content locks on page load, because it can beat the component render
+                    setTimeout(() => {
+                        backOfficeEditorViewServices.getContentLocks($routeParams.id);
+                    }, 500);
                 }
                 loadMarkup();
             } else {
@@ -302,16 +302,7 @@
             let lockedByOtherUser = matchingContent.filter(item => item.sessionId != window.boevSessionId);
             const contentIsLockedByOtherUser = lockedByOtherUser.length > 0;
 
-            if (contentIsLocked) {
-                if (contentIsLockedByOtherUser) {
-                    alert(`This content has been locked by ${lockedByOtherUser[0].userName} (${lockedByOtherUser[0].userEmail})`);
-                    toggleViewInactive(true);
-                } else {
-                    toggleViewInactive(false);
-                }
-            } else {
-                toggleViewInactive(false);
-            }
+            toggleViewInactive(contentIsLockedByOtherUser);
 
             let lockedData = {
                 contentIsLocked: contentIsLocked,
@@ -319,7 +310,12 @@
                 lockedByUserName: lockedByOtherUser.length > 0 ? lockedByOtherUser[0].userName : '',
                 lockedByUserEmail: lockedByOtherUser.length > 0 ? lockedByOtherUser[0].userEmail : ''
             }
+            
             eventsService.emit("contentLocked", { eventName: 'ContentLocked', lockedData });
+            
+            if (contentIsLockedByOtherUser) {
+                alert(`This content has been locked by ${lockedByOtherUser[0].userName} (${lockedByOtherUser[0].userEmail})`);
+            }
         } 
 
         function toggleViewInactive(shouldLock) {

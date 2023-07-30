@@ -85,7 +85,7 @@
     }
 
     var getContentLocks = function (contentId) {
-        $.connection.send('GetContentLocks', contentId);
+        $.connection.send('GetContentLocksForContentId', contentId);
     }
 
     var addUserLock = function (lockData) {

@@ -91,9 +91,12 @@ namespace BackOfficeEditorView.Core.Hubs
             await Clients.Group(GroupID).SendAsync("ContentViewed", _viewManager.FetchAllViews());
         }
 
-        public async Task GetContentLocks(int contentId)
+        public async Task GetContentLocksForContentId(object contentIdStr)
         {
-            var contentLocks = _contentLockManager.GetCurrentContentLocks();
+            if (!int.TryParse(contentIdStr?.ToString(), out var contentId))
+                return;
+
+            var contentLocks = _contentLockManager.GetCurrentContentLocks(contentId);
             if (contentLocks.Any())
             {
                 await Clients.Caller.SendAsync("ContentLocked", contentLocks);
@@ -116,7 +119,7 @@ namespace BackOfficeEditorView.Core.Hubs
             // put it in the repository
             _contentLockManager.AddUserLock(userContentLock);
 
-            await Clients.Group(GroupID).SendAsync("ContentLocked", _contentLockManager.GetCurrentContentLocks());
+            await Clients.OthersInGroup(GroupID).SendAsync("ContentLocked", _contentLockManager.GetCurrentContentLocks());
         }
 
         public async Task RemoveContentLockForUser(object userContentViewObj)
@@ -134,7 +137,7 @@ namespace BackOfficeEditorView.Core.Hubs
             if (currentLocks.Any(l => l.UserId == userContentLock.UserId))
             {
                 currentLocks = _contentLockManager.RemoveUserLocks(userContentLock.UserId);
-                await Clients.Group(GroupID).SendAsync("ContentLocked", currentLocks);
+                await Clients.OthersInGroup(GroupID).SendAsync("ContentLocked", currentLocks);
             }
         }
 

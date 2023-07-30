@@ -17,7 +17,7 @@ namespace BackOfficeEditorView.Core.Services
         public List<UserContentLock> AddUserLock(UserContentLock ucLock)
         {
             var userLocks = GetCurrentContentLocks();
-            if (userLocks.All(l => l.UserId != ucLock.UserId))
+            if (userLocks.All(l => l.UserId != ucLock.UserId || l.ContentId != ucLock.ContentId))
             {
                 userLocks.Add(ucLock);
 
