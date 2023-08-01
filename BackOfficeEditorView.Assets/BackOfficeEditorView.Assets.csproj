@@ -7,7 +7,7 @@
     <Title>BackOfficeEditorView.Assets</Title>
     <Description>...</Description>
     <PackageTags>umbraco plugin package</PackageTags>
-	<VersionPrefix>1.0.2</VersionPrefix>
+	<VersionPrefix>1.1.0</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>

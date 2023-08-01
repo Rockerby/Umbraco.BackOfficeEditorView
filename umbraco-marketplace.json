@@ -4,6 +4,10 @@
   "LicenseTypes": [ "Free" ],
   "Screenshots": [
     {
+      "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-With-Locking.png",
+      "Caption": "Now you can lock the content to stop other editors from updating!"
+    },
+    {
       "ImageUrl": "https://github.com/Rockerby/BackOfficeEditorView/raw/main/BackOfficeEditorView/img/Content-No-Others.png",
       "Caption": "Content view - no other users"
     },
