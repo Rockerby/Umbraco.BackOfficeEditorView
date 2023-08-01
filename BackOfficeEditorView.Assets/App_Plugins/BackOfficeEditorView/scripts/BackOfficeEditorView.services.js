@@ -8,9 +8,8 @@
     var proxy = null;
     const sessionCookieId = '_boev_sessionid';
     let sessionId = '';
+
     var initialize = function () {
-
-
         var scripts = [
             //Umbraco.Sys.ServerVariables.umbracoSettings.umbracoPath + '/lib/signalr/signalr.min.js']
             '/umbraco/lib/signalr/signalr.min.js']
@@ -41,7 +40,6 @@
     }
 
     function hubSetup(resolve) {
-
         //Creating proxy
         if (proxy == null) {
             if (typeof (signalR) == 'undefined' || typeof(Umbraco.Sys.ServerVariables.boev) == 'undefined') {
@@ -54,7 +52,6 @@
                 .withAutomaticReconnect()
                 .configureLogging(signalR.LogLevel.Warning)
                 .build();
-            console.log($.connection);
             proxy = $.connection.SyncHub;
         }
 
@@ -63,7 +60,11 @@
         // Tie into a custom event by listening to $rootScope.$on("boev_messageReceived", (ev, data) { ... });
         $.connection.on('ContentViewed', (data) => {
             eventsService.emit("boev.messageReceived", { eventName: 'ContentViewed', data });
-        })
+        });
+
+        $.connection.on('ContentLocked', (data) => {
+            eventsService.emit("boev.contentLockedMessageReceived", { eventName: 'ContentLocked', data });
+        });
 
         // Start the connection with the server to put it in an open state and ready
         // to communicate
@@ -82,11 +83,27 @@
     var removeViews = function (user) {
         $.connection.send('removeViews', sessionId);
     }
+
+    var getContentLocks = function (contentId) {
+        $.connection.send('GetContentLocksForContentId', contentId);
+    }
+
+    var addUserLock = function (lockData) {
+        lockData.sessionId = sessionId;
+        $.connection.send('AddContentLockForUser', lockData);
+    }
+
+    var removeUserLock = function (lockData) {
+        $.connection.send('RemoveContentLockForUser', lockData);
+    }
     
     return {
         initialize,
         registerView,
-        removeViews
+        removeViews,
+        getContentLocks,
+        addUserLock,
+        removeUserLock
     };
 };
 

@@ -1,13 +1,14 @@
-﻿#boev_main-wrapper {
+﻿#boev_main-wrapper, #boev_lock-icon-wrapper {
     //background-image: url('/App_Plugins/BackOfficeEditorView/img/spy-icon.svg');
     //background-size: cover;
     display: flex;
     width: 32px;
     height: 32px;
     margin-top: 0;
+
     &.active {
         svg path {
-            fill:red;
+            fill: red;
         }
     }
 }
@@ -15,4 +16,8 @@
 
 .boev_userlist {
     gap:20px;
+}
+
+.boev_editing-buttons {
+    display: flex;
 }

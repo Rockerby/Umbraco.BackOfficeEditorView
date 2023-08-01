@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Threading.Tasks;
-using BackOfficeEditorView.Core.Models;
+﻿using BackOfficeEditorView.Core.Models;
 using BackOfficeEditorView.Core.Services;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
@@ -12,10 +9,12 @@ namespace BackOfficeEditorView.Core.Hubs
     {
         public const string GroupID = "BackOfficeEditorView-signalr";
         private readonly IViewManager _viewManager;
+        private readonly IContentLockManager _contentLockManager;
 
-        public SyncHub (IViewManager viewManager)
+        public SyncHub (IViewManager viewManager, IContentLockManager contentLockManager)
         {
             _viewManager = viewManager;
+            _contentLockManager = contentLockManager;
         }
 
         public override async Task OnConnectedAsync()
@@ -92,6 +91,55 @@ namespace BackOfficeEditorView.Core.Hubs
             await Clients.Group(GroupID).SendAsync("ContentViewed", _viewManager.FetchAllViews());
         }
 
+        public async Task GetContentLocksForContentId(object contentIdStr)
+        {
+            if (!int.TryParse(contentIdStr?.ToString(), out var contentId))
+                return;
+
+            var contentLocks = _contentLockManager.GetCurrentContentLocks(contentId);
+            if (contentLocks.Any())
+            {
+                await Clients.Caller.SendAsync("ContentLocked", contentLocks);
+            }
+        }
+
+        public async Task AddContentLockForUser(object userContentViewObj)
+        {
+            if (userContentViewObj == null)
+                return;
+
+            UserContentLock userContentLock =
+                JsonConvert.DeserializeObject<UserContentLock>(userContentViewObj.ToString());
+            if (userContentLock == null)
+                return;
+
+            // Remove any existing locks
+            _contentLockManager.RemoveUserLocks(userContentLock.UserId);
+
+            // put it in the repository
+            _contentLockManager.AddUserLock(userContentLock);
+
+            await Clients.OthersInGroup(GroupID).SendAsync("ContentLocked", _contentLockManager.GetCurrentContentLocks());
+        }
+
+        public async Task RemoveContentLockForUser(object userContentViewObj)
+        {
+            if (userContentViewObj == null)
+                return;
+
+            UserContentLock userContentLock =
+                JsonConvert.DeserializeObject<UserContentLock>(userContentViewObj.ToString());
+            if (userContentLock == null)
+                return;
+
+            var currentLocks = _contentLockManager.GetCurrentContentLocks();
+
+            if (currentLocks.Any(l => l.UserId == userContentLock.UserId))
+            {
+                currentLocks = _contentLockManager.RemoveUserLocks(userContentLock.UserId);
+                await Clients.OthersInGroup(GroupID).SendAsync("ContentLocked", currentLocks);
+            }
+        }
 
     }
 }

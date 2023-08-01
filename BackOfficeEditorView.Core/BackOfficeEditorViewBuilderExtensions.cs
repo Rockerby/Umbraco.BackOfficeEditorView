@@ -36,6 +36,7 @@ namespace BackOfficeEditorView.Core
 
             // Register the services needed to function
             builder.Services.AddScoped<IViewManager, CacheViewManager>();
+            builder.Services.AddScoped<IContentLockManager, CacheContentLockManager>();
             builder.Services.AddSingleton<BackOfficeEditorViewConfigService>();
             builder.Services.AddSingleton<BackOfficeEditorViewHubRoutes>();
             builder.Services.AddSignalR();
