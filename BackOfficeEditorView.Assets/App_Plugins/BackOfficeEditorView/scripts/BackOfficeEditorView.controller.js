@@ -318,14 +318,18 @@
             if (contentIsLockedByOtherUser) {
                 alert(`This content has been locked by ${lockedByOtherUser[0].userName} (${lockedByOtherUser[0].userEmail})`);
             }
-        } 
+        }
 
         function toggleViewInactive(shouldLock) {
             setTimeout(() => {
-                document.querySelector('[data-element="editor-container"]').style.pointerEvents = shouldLock ? "none" : "auto";
-                document.querySelector('[data-element="editor-footer"]').style.pointerEvents = shouldLock ? "none" : "auto";
-                document.querySelector('#nameField').style.pointerEvents = shouldLock ? "none" : "auto";
-                document.querySelector('[data-element="editor-actions"]').style.pointerEvents = shouldLock ? "none" : "auto";
+                if (document.querySelector('[data-element="editor-container"]'))
+                    document.querySelector('[data-element="editor-container"]').style.pointerEvents = shouldLock ? "none" : "auto";
+                if (document.querySelector('[data-element="editor-footer"]'))
+                    document.querySelector('[data-element="editor-footer"]').style.pointerEvents = shouldLock ? "none" : "auto";
+                if (document.querySelector('#nameField'))
+                    document.querySelector('#nameField').style.pointerEvents = shouldLock ? "none" : "auto";
+                if (document.querySelector('[data-element="editor-actions"]'))
+                    document.querySelector('[data-element="editor-actions"]').style.pointerEvents = shouldLock ? "none" : "auto";
             }, 1000);
         }
 
