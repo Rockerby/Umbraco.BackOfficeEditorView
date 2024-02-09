@@ -9,7 +9,7 @@ The easiest way is to install from [NuGet](https://www.nuget.org/packages/Arjo.U
 `dotnet add package Arjo.UmbracoBackOfficeEditorView`
   
 ## How to use
-After installing the package you will see an icon next to the name bar of the content. You'll be immediately notification when another user is viewing that content,
+After installing the package you will see an icon next to the name bar of the content. You'll be immediately notified when another user is viewing that content,
 either before the start or during your session. Simply click the icon to see who the other editors are.  
 
 To add a locking feature so that other editors can't edit the content while you are, add the following to your appSettings.json:  
