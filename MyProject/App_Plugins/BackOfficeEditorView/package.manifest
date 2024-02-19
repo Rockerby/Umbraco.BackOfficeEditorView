@@ -1,0 +1,15 @@
+﻿{
+  "name": "BackOfficeEditorView",
+  "version": "1.0.0",
+  "allowPackageTelemetry": true,
+  "bundleOptions": "None",
+  "css": [
+    "~/App_Plugins/BackOfficeEditorView/styles/boev_main.css"
+  ],
+  "javascript": [
+    "~/App_Plugins/BackOfficeEditorView/scripts/js.cookie.min.js",
+    "~/App_Plugins/BackOfficeEditorView/scripts/BackOfficeEditorView.services.js",
+    "~/App_Plugins/BackOfficeEditorView/scripts/BackOfficeEditorView.startup.js",
+    "~/App_Plugins/BackOfficeEditorView/scripts/BackOfficeEditorView.controller.js"
+  ]
+}

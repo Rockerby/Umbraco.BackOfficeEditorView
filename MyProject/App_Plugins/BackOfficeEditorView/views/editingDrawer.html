@@ -1,0 +1,57 @@
+﻿<div ng-controller="backOfficeEditorViewDrawerController as vm">
+    <umb-editor-view data-element="overlay-user">
+
+        <umb-editor-header name="'Users also viewing this content'" name-locked="true" hide-alias="true" hide-icon="true"
+                           hide-description="true">
+        </umb-editor-header>
+
+        <umb-editor-container>
+            <div>
+                <umb-box>
+                    <umb-box-content>
+                        <umb-control-group ng-if="vm.userList.length > 0" ng-repeat="user in vm.userList">
+                            <div class="flex items-center boev_userlist">
+                                <umb-avatar class="umb-app-header__action-icon"
+                                            size="xxs"
+                                            color="secondary"
+                                            name="{{user.userName}}"
+                                            img-src="{{vm.avatar[0].value}}"
+                                            img-srcset="{{vm.avatar[1].value}} 2x, {{vm.avatar[2].value}} 3x">
+                                </umb-avatar>
+
+                                <div title="SessionID {{ user.sessionId }} | UserID {{ user.userId }}">
+                                    {{ user.userName }}<br />
+                                    <small>{{ user.dateLogged | date:'medium' }}</small>
+                                </div>
+                            </div>
+                        </umb-control-group>
+                        <umb-control-group ng-if="vm.userList.length == 0">
+                            <div class="flex items-center boev_userlist">
+                                <div>
+                                    There are no other users viewing this content.
+                                </div>
+                            </div>
+                        </umb-control-group>
+
+                    </umb-box-content>
+                </umb-box>
+
+            </div>
+
+        </umb-editor-container>
+
+        <umb-editor-footer>
+
+            <umb-editor-footer-content-right>
+
+                <umb-button class="btn-group-vertical" data-element="button-overlayClose" type="button" button-style="link"
+                            label-key="general_close" shortcut="esc" action="vm.close()">
+                </umb-button>
+
+            </umb-editor-footer-content-right>
+
+        </umb-editor-footer>
+
+    </umb-editor-view>
+
+</div>
