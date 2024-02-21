@@ -1,4 +1,6 @@
-﻿using BackOfficeEditorView.Core.Models;
+﻿using BackOfficeEditorView.Core.Configuration;
+using BackOfficeEditorView.Core.Models;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Extensions;
 
@@ -8,21 +10,29 @@ namespace BackOfficeEditorView.Core.Services
     {
         private const string CACHE_KEY = "UserContentLockManager";
         private readonly IAppPolicyCache _runtimeCache;
+        private readonly bool _isCultureAware;
 
-        public CacheContentLockManager(AppCaches appCaches)
+        public CacheContentLockManager(AppCaches appCaches, IOptions<BackOfficeEditorViewSettings> settings)
         {
             _runtimeCache = appCaches.RuntimeCache;
+            _isCultureAware = settings.Value?.IsCultureAware ?? false;
         }
 
         public List<UserContentLock> AddUserLock(UserContentLock ucLock)
         {
             var userLocks = GetCurrentContentLocks();
-            if (userLocks.All(l => l.UserId != ucLock.UserId || l.ContentId != ucLock.ContentId))
+            var alreadyExists = userLocks?.Any(l =>
+                    l.UserId == ucLock.UserId
+                    && l.ContentId == ucLock.ContentId
+                    && (!_isCultureAware || (_isCultureAware && l.Culture == ucLock.Culture)))
+                ?? false;
+
+            if (!alreadyExists)
             {
                 userLocks.Add(ucLock);
 
                 _runtimeCache.InsertCacheItem(
-                CACHE_KEY,
+                    CACHE_KEY,
                     () => userLocks,
                     new TimeSpan(0, 1, 0, 0));
             }
@@ -47,7 +57,7 @@ namespace BackOfficeEditorView.Core.Services
             return userLocks;
         }
 
-        public List<UserContentLock> GetCurrentContentLocks(int? contentId = null)
+        public List<UserContentLock> GetCurrentContentLocks(int? contentId = null, string? culture = null)
         {
             var contentLocks = _runtimeCache.GetCacheItem(
                 CACHE_KEY, 
@@ -57,6 +67,11 @@ namespace BackOfficeEditorView.Core.Services
             if (contentId.HasValue)
             {
                 contentLocks = contentLocks?.Where(l => l.ContentId == contentId.Value).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(culture))
+            {
+                contentLocks = contentLocks?.Where(l => l.Culture == culture).ToList();
             }
 
             return contentLocks ?? new List<UserContentLock>();

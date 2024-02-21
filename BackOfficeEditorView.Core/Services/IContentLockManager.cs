@@ -6,6 +6,6 @@ namespace BackOfficeEditorView.Core.Services
     {
         List<UserContentLock> AddUserLock(UserContentLock ucLock);
         List<UserContentLock> RemoveUserLocks(int userId);
-        List<UserContentLock> GetCurrentContentLocks(int? contentId = null);
+        List<UserContentLock> GetCurrentContentLocks(int? contentId = null, string? culture = null);
     }
 }

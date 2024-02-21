@@ -1,6 +1,8 @@
-﻿using BackOfficeEditorView.Core.Models;
+﻿using BackOfficeEditorView.Core.Configuration;
+using BackOfficeEditorView.Core.Models;
 using BackOfficeEditorView.Core.Services;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace BackOfficeEditorView.Core.Hubs
@@ -10,11 +12,13 @@ namespace BackOfficeEditorView.Core.Hubs
         public const string GroupID = "BackOfficeEditorView-signalr";
         private readonly IViewManager _viewManager;
         private readonly IContentLockManager _contentLockManager;
+        private readonly bool _isCultureAware;
 
-        public SyncHub (IViewManager viewManager, IContentLockManager contentLockManager)
+        public SyncHub(IViewManager viewManager, IContentLockManager contentLockManager, IOptions<BackOfficeEditorViewSettings> settings)
         {
             _viewManager = viewManager;
             _contentLockManager = contentLockManager;
+            _isCultureAware = settings.Value?.IsCultureAware ?? false;
         }
 
         public override async Task OnConnectedAsync()
@@ -91,12 +95,15 @@ namespace BackOfficeEditorView.Core.Hubs
             await Clients.Group(GroupID).SendAsync("ContentViewed", _viewManager.FetchAllViews());
         }
 
-        public async Task GetContentLocksForContentId(object contentIdStr)
+        public async Task GetContentLocksForContentId(object contentIdStr, object culture)
         {
             if (!int.TryParse(contentIdStr?.ToString(), out var contentId))
                 return;
 
-            var contentLocks = _contentLockManager.GetCurrentContentLocks(contentId);
+            var cultureStr = !string.IsNullOrEmpty(culture.ToString()) ? culture.ToString() : null;
+
+            var contentLocks = _contentLockManager.GetCurrentContentLocks(contentId, cultureStr);
+            
             if (contentLocks.Any())
             {
                 await Clients.Caller.SendAsync("ContentLocked", contentLocks);

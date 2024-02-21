@@ -84,8 +84,8 @@
         $.connection.send('removeViews', sessionId);
     }
 
-    var getContentLocks = function (contentId) {
-        $.connection.send('GetContentLocksForContentId', contentId);
+    var getContentLocks = function (contentId, culture = '') {
+        $.connection.send('GetContentLocksForContentId', contentId, culture);
     }
 
     var addUserLock = function (lockData) {

@@ -13,7 +13,7 @@ namespace BackOfficeEditorView.Core.Services
         void RemoveByUser(int userId);
         void RemoveBySession(string sessionId);
         List<UserContentView> FetchAllViews();
-        List<UserContentView> FetchCurrentViews(int contentId);
+        List<UserContentView> FetchCurrentViews(int contentId, string? culture = null);
 
     }
 }
