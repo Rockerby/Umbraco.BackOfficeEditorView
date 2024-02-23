@@ -224,6 +224,9 @@
                     if (Umbraco.Sys.ServerVariables.boev.enabledLockFunction || false) {
                         // delay the call for content locks on page load, because it can beat the component render
                         setTimeout(() => {
+                            // making sure everything is unlocked on the view before reassessing the locked state
+                            toggleViewInactive(false);
+
                             if (isCultureAware) {
                                 backOfficeEditorViewServices.getContentLocks($routeParams.id, $routeParams.cculture ?? $routeParams.mculture);
                             }
