@@ -100,7 +100,7 @@ namespace BackOfficeEditorView.Core.Hubs
             if (!int.TryParse(contentIdStr?.ToString(), out var contentId))
                 return;
 
-            var cultureStr = !string.IsNullOrEmpty(culture.ToString()) ? culture.ToString() : null;
+            var cultureStr = culture?.ToString();
 
             var contentLocks = _contentLockManager.GetCurrentContentLocks(contentId, cultureStr);
             
