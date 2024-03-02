@@ -11,3 +11,6 @@ Resolved issues on certain environments stopping the icon from showing
 
 ## 1.1.0
 Add a new feature to allow locking of content pages to stop other editors from updating
+
+## 1.2.0
+Add a new feature to allow culture aware notifications and locking

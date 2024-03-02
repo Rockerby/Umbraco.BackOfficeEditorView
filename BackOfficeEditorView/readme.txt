@@ -9,4 +9,10 @@ To enable content locking, simply add the below to you appSettings.json:
     "canLockContent": true
   }
 
+To enable culture aware notifications (and locking if enabled), simply add the below to you appSettings.json:
+
+  "BackOfficeEditorView": {
+    "isCultureAware": true
+  }
+
 If you have any issues or questions, reach out to me over on GitHub - https://github.com/Rockerby/BackOfficeEditorView

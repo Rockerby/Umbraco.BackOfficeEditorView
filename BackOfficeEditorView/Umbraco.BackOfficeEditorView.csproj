@@ -9,7 +9,7 @@
 		<Title>BackOffice Editor View for Umbraco</Title>
 		<PackageIcon>icon.png</PackageIcon>
 
-		<VersionPrefix>1.1.0</VersionPrefix>
+		<VersionPrefix>1.2.0</VersionPrefix>
 		<Authors>Richard Ockerby</Authors>
 		<Company>Arjo</Company>
 
@@ -22,7 +22,7 @@
 
 		<RepositoryUrl>https://github.com/Rockerby</RepositoryUrl>
 
-		<Copyright>Richard Ockerby @ 2022-2023</Copyright>
+		<Copyright>Richard Ockerby @ 2022-2024</Copyright>
 		<Description>See who else is editing the same content as you! An Umbraco package to help prevent content overwriting by multiple users.</Description>
 
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
