@@ -13,5 +13,6 @@ namespace BackOfficeEditorView.Core.Configuration
     {
         public string Name { get; set; }
         public bool CanLockContent { get; set; }
+        public bool IsCultureAware { get; set; }
     }
 }

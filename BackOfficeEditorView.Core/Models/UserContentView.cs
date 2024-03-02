@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BackOfficeEditorView.Core.Models
 {
@@ -19,5 +14,7 @@ namespace BackOfficeEditorView.Core.Models
         public string UserName { get; set; }
         [JsonProperty("contentId")]
         public int ContentId { get; set; }
+        [JsonProperty("culture")]
+        public string? Culture { get; set; }
     }
 }

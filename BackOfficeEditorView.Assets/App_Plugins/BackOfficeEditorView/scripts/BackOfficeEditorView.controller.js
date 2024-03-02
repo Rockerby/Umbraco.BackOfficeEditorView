@@ -11,6 +11,7 @@
     function backOfficeEditorViewMenuController($scope, $rootScope, eventsService, editorService, $routeParams, backOfficeEditorViewServices) {
         var injector = angular.element('#umbracoMainPageBody').injector();
         var authResource = injector.get('authResource');
+        var isCultureAware = Umbraco.Sys.ServerVariables.boev.isCultureAware === true;
 
         var vm = this;
         vm.openViewDrawer = openViewDrawer;
@@ -54,6 +55,11 @@
                         userEmail: user.email,
                         contentId: $routeParams.id
                     };
+
+                    if (isCultureAware) {
+                        lockData.culture = $routeParams.cculture ?? $routeParams.mculture;
+                    }
+
                     if (vm.isLocked) {
                         backOfficeEditorViewServices.addUserLock(lockData);
                     } else {
@@ -159,6 +165,7 @@
         var oldHref = document.location.href;
         var injector = angular.element('#umbracoMainPageBody').injector();
         var authResource = injector.get('authResource');
+        var isCultureAware = Umbraco.Sys.ServerVariables.boev.isCultureAware === true;
 
         // Initialise the services and trigger our functions when it's done
         backOfficeEditorViewServices.initialize().then(() => {
@@ -207,12 +214,25 @@
                             userName: user.name,
                             contentId: $routeParams.id
                         };
+
+                        if (isCultureAware) {
+                            viewData.culture = $routeParams.cculture ?? $routeParams.mculture;
+                        }
+
                         backOfficeEditorViewServices.registerView(viewData);
                     });
                     if (Umbraco.Sys.ServerVariables.boev.enabledLockFunction || false) {
                         // delay the call for content locks on page load, because it can beat the component render
                         setTimeout(() => {
-                            backOfficeEditorViewServices.getContentLocks($routeParams.id);
+                            // making sure everything is unlocked on the view before reassessing the locked state
+                            toggleViewInactive(false);
+
+                            if (isCultureAware) {
+                                backOfficeEditorViewServices.getContentLocks($routeParams.id, $routeParams.cculture ?? $routeParams.mculture);
+                            }
+                            else {
+                                backOfficeEditorViewServices.getContentLocks($routeParams.id);
+                            }
                         }, 500);
                     }
                 }
@@ -248,6 +268,11 @@
                                     userEmail: user.email,
                                     contentId: $routeParams.id
                                 };
+
+                                if (isCultureAware) {
+                                    lockData.culture = $routeParams.cculture ?? $routeParams.mculture;
+                                }
+
                                 backOfficeEditorViewServices.removeUserLock(lockData);
                             });
                         }
@@ -283,6 +308,11 @@
                         userEmail: user.email,
                         contentId: $routeParams.id
                     };
+
+                    if (isCultureAware) {
+                        lockData.culture = $routeParams.cculture ?? $routeParams.mculture;
+                    }
+
                     backOfficeEditorViewServices.removeUserLock(lockData);
                 });
             }
@@ -293,7 +323,13 @@
         function lockedContentChangeReceived(eventData) {
             var messages = eventData.data;
             var matchingContent = messages.filter((item) => {
-                return item.contentId == parseInt($routeParams.id);
+                var isMatch = item.contentId === parseInt($routeParams.id);
+
+                if (isCultureAware) {
+                    isMatch = isMatch && item.culture === ($routeParams.cculture ?? $routeParams.mculture);
+                }
+
+                return isMatch;
             });
 
             if (typeof (matchingContent) == 'undefined') {
@@ -322,14 +358,20 @@
 
         function toggleViewInactive(shouldLock) {
             setTimeout(() => {
-                if (document.querySelector('[data-element="editor-container"]'))
-                    document.querySelector('[data-element="editor-container"]').style.pointerEvents = shouldLock ? "none" : "auto";
-                if (document.querySelector('[data-element="editor-footer"]'))
-                    document.querySelector('[data-element="editor-footer"]').style.pointerEvents = shouldLock ? "none" : "auto";
-                if (document.querySelector('#nameField'))
-                    document.querySelector('#nameField').style.pointerEvents = shouldLock ? "none" : "auto";
-                if (document.querySelector('[data-element="editor-actions"]'))
-                    document.querySelector('[data-element="editor-actions"]').style.pointerEvents = shouldLock ? "none" : "auto";
+                const elementsToToggle = [
+                    '[data-element="editor-container"]',
+                    '[data-element="editor-footer"]',
+                    'ng-form[name="headerNameForm"]',
+                    '[data-element="editor-actions"]'
+                ];
+
+                elementsToToggle.forEach(selector => {
+                    document.querySelectorAll(selector).forEach(element => {
+                        if (element) {
+                            element.style.pointerEvents = shouldLock ? "none" : "auto";
+                        }
+                    });
+                });
             }, 1000);
         }
 
@@ -337,7 +379,13 @@
             var messages = eventData.data;
             // Look for any content that matches what we're looking at (but isn't us)
             var matchingContent = messages.filter((item) => {
-                return item.sessionId != window.boevSessionId && item.contentId == parseInt($routeParams.id)
+                var isMatch = item.sessionId !== window.boevSessionId && item.contentId === parseInt($routeParams.id);
+
+                if (isCultureAware) {
+                    isMatch = isMatch && item.culture === ($routeParams.cculture ?? $routeParams.mculture);
+                }
+
+                return isMatch;
             });
 
             if (typeof (matchingContent) == 'undefined') {

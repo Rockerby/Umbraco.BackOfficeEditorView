@@ -1,7 +1,10 @@
-﻿using BackOfficeEditorView.Core.Models;
+﻿using BackOfficeEditorView.Core.Configuration;
+using BackOfficeEditorView.Core.Models;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using Umbraco.Cms.Core.Cache;
@@ -13,12 +16,14 @@ namespace BackOfficeEditorView.Core.Services
     {
         private const string CACHE_KEY = "ViewManagerCurrentViews";
         private readonly IAppPolicyCache _runtimeCache;
+        private readonly bool _isCultureAware;
 
-        public CacheViewManager(AppCaches appCaches)
+        public CacheViewManager(AppCaches appCaches, IOptions<BackOfficeEditorViewSettings> settings)
         {
             // Grap RuntimeCache from appCaches
             // and assign to our private field.
             _runtimeCache = appCaches.RuntimeCache;
+            _isCultureAware = settings.Value?.IsCultureAware ?? false;
         }
 
         /// <summary>
@@ -29,7 +34,15 @@ namespace BackOfficeEditorView.Core.Services
         public void AddUserView(UserContentView ucView)
         {
             var list = FetchAllViews();
-            if (list?.FirstOrDefault(a => a.SessionId == ucView.SessionId && a.ContentId == ucView.ContentId) == null) {
+
+            var alreadyExists = list?.Any(a =>
+                    a.SessionId == ucView.SessionId
+                    && a.ContentId == ucView.ContentId
+                    && (!_isCultureAware || (_isCultureAware && a.Culture == ucView.Culture)))
+                ?? false;
+
+            if (!alreadyExists)
+            {
                 list.Add(ucView);
                 _runtimeCache.InsertCacheItem(CACHE_KEY, () => { return list; }, new TimeSpan(1, 0, 0, 0), true);
             }
@@ -69,12 +82,16 @@ namespace BackOfficeEditorView.Core.Services
             return allViews;
         }
 
-        public List<UserContentView> FetchCurrentViews(int contentId)
+        public List<UserContentView> FetchCurrentViews(int contentId, string? culture = null)
         {
             var allViews = FetchAllViews();
 
-            if (allViews != null)
-                return allViews.Where(a => a.ContentId == contentId).ToList();
+            allViews = allViews?.Where(v => v.ContentId == contentId).ToList();
+
+            if (!string.IsNullOrEmpty(culture))
+            {
+                allViews = allViews?.Where(v => v.Culture == culture).ToList();
+            }
 
             return allViews;
         }

@@ -43,8 +43,9 @@ namespace BackOfficeEditorView.Core.Notifications
         {
             notification.ServerVariables.Add("boev", new Dictionary<string, object>
             {
-                {"signalRHub",  _hubRoutes.GetBackOfficeEditorViewHubRoute() },
-                {"enabledLockFunction", _settings.Value?.CanLockContent ?? false }
+                { "signalRHub", _hubRoutes.GetBackOfficeEditorViewHubRoute() },
+                { "enabledLockFunction", _settings.Value?.CanLockContent ?? false },
+                { "isCultureAware", _settings.Value?.IsCultureAware ?? false }
             });
         }
 
@@ -54,7 +55,5 @@ namespace BackOfficeEditorView.Core.Notifications
             if (user == null) return false;
             return user.Groups.Any(x => x.Alias.Equals(Constants.Security.AdminGroupAlias));
         }
-
     }
-
 }

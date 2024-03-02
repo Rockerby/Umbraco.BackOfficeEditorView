@@ -16,5 +16,7 @@ namespace BackOfficeEditorView.Core.Models
         public string? UserEmail { get; set; }
         [JsonProperty("contentId")]
         public int? ContentId { get; set; }
+        [JsonProperty("culture")]
+        public string? Culture { get; set; }
     }
 }
