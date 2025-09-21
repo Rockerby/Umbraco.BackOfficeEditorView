@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umbraco.BackOfficeEditorView", "BackOfficeEditorView\Umbraco.BackOfficeEditorView.csproj", "{6EEE3FDE-EC40-4750-8566-5C5724DF0D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyProject", "MyProject\MyProject.csproj", "{B0F8F860-8B91-49EC-B7D9-C8A2F329536A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{6EEE3FDE-EC40-4750-8566-5C5724DF0D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EEE3FDE-EC40-4750-8566-5C5724DF0D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EEE3FDE-EC40-4750-8566-5C5724DF0D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F8F860-8B91-49EC-B7D9-C8A2F329536A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F8F860-8B91-49EC-B7D9-C8A2F329536A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F8F860-8B91-49EC-B7D9-C8A2F329536A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F8F860-8B91-49EC-B7D9-C8A2F329536A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
